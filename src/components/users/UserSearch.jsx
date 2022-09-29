@@ -3,20 +3,26 @@ import GithubContext from "../../contexts/github/GithubContext";
 
 export const UserSearch = () => {
   const [text, setText] = useState(() => "");
-  const { users } = useContext(GithubContext);
+  const { users, searchUsers, clearUsers } = useContext(GithubContext);
 
   const handleChange = (e) => setText(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const submitText = text.trim();
 
-    if (text === "") {
+    if (submitText === "") {
       alert("Please enter a text");
+      return;
     }
 
     // @todo serach users
-
+    searchUsers(submitText);
     setText(() => "");
+  };
+
+  const handleClear = () => {
+    if (users.length > 0) clearUsers();
   };
 
   return (
@@ -43,9 +49,11 @@ export const UserSearch = () => {
         </form>
       </div>
 
-      {users.lenght > 0 && (
+      {users.length > 0 && (
         <div>
-          <button className="btn btn-ghost btn-lg">Clear</button>
+          <button className="btn btn-ghost btn-lg" onClick={handleClear}>
+            Clear
+          </button>
         </div>
       )}
       {/* Only shows the Clear btn if users has values */}
