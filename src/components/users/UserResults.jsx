@@ -1,25 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import GithubContext from "../../contexts/github/GithubContext";
 import { LoadingSpinner } from "../layout/LoadingSpinner";
 import { UserItem } from "./UserItem";
 
 export const UserResults = () => {
-  const [users, setUsers] = useState(() => []);
-  const [isloading, setIsloading] = useState(() => true);
+  const { users, isloading, fetchUsers } = useContext(GithubContext);
+
   useEffect(() => {
     fetchUsers();
   }, []);
-
-  const fetchUsers = async () => {
-    const response = await fetch(`${import.meta.env.VITE_GITHUB_URL}/users`, {
-      headers: {
-        Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
-      },
-    });
-
-    const data = await response.json();
-    setUsers(() => data);
-    setIsloading(() => false);
-  };
 
   if (isloading) return <LoadingSpinner />;
 
