@@ -7,6 +7,12 @@ export const githubReducer = (state, action) => {
         isLoading: false,
       };
 
+    case "SET_LOADING":
+      return {
+        ...state,
+        isLoading: true,
+      };
+
     default:
       return state;
   }
