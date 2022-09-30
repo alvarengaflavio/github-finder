@@ -10,7 +10,6 @@ export const AlertProvider = ({ children }) => {
 
   /* Set an Alert */
   const setAlert = (msg, type) => {
-    console.log(msg, type);
     dispatch({
       type: "SET_ALERT",
       payload: { msg, type },
