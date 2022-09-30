@@ -9,6 +9,7 @@ const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
+    user: {},
     isLoading: false,
   };
 
@@ -36,6 +37,29 @@ export const GithubProvider = ({ children }) => {
     });
   };
 
+  /* Get a Single USER  */
+  const getUser = async (login) => {
+    setLoading();
+
+    const response = await fetch(`${GITHUB_URL}/users/${login}`, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+      },
+    });
+
+    if (response?.status === 404) {
+      window.location = "/notfound";
+      return;
+    }
+
+    const data = await response.json();
+
+    dispatch({
+      type: "GET_USER",
+      payload: data,
+    });
+  };
+
   // SET_LOADING
   const setLoading = () => dispatch({ type: "SET_LOADING" });
 
@@ -48,6 +72,7 @@ export const GithubProvider = ({ children }) => {
         ...state,
         searchUsers,
         clearUsers,
+        getUser,
       }}
     >
       {children}
