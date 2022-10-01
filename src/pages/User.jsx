@@ -3,14 +3,18 @@ import { useParams, Link } from "react-router-dom";
 import GithubContext from "../contexts/github/GithubContext";
 import { LoadingSpinner } from "../components/layout/LoadingSpinner";
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
+import { Repos } from "../components/repos/Repos";
 
 export const User = () => {
-  const { user, getUser, isLoading } = useContext(GithubContext);
+  const { user, getUser, isLoading, repos, getUserRepos } =
+    useContext(GithubContext);
 
   const params = useParams();
 
   useEffect(() => {
     getUser(params.login);
+    getUserRepos(params.login);
+    // eslint-disable-next-line
   }, []);
 
   const {
@@ -34,9 +38,9 @@ export const User = () => {
 
   return (
     <>
-      <div className="w-full mx-auto lg:w-10/12">
-        <div className="mb-4">
-          <Link to="/" className="btn btn-ghost">
+      <div className="w-full mx-auto -mt-20 lg:w-10/12">
+        <div className="mb-10">
+          <Link to="/" className="btn btn-ghost text-xl">
             back to search
           </Link>
         </div>
@@ -155,6 +159,7 @@ export const User = () => {
             </div>
           </div>
         </div>
+        <Repos repos={repos} />
       </div>
     </>
   );

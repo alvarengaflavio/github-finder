@@ -8,6 +8,7 @@ const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   const initialState = {
+    repos: [],
     users: [],
     user: {},
     isLoading: false,
@@ -15,7 +16,7 @@ export const GithubProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  // Get seach results
+  // Get search results
   const searchUsers = async (text) => {
     setLoading();
 
@@ -60,6 +61,24 @@ export const GithubProvider = ({ children }) => {
     });
   };
 
+  // Get Repos
+  const getUserRepos = async (username) => {
+    setLoading();
+
+    const response = await fetch(`${GITHUB_URL}/users/${username}/repos`, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+      },
+    });
+
+    const data = await response.json();
+
+    dispatch({
+      type: "GET_REPOS",
+      payload: data,
+    });
+  };
+
   // SET_LOADING
   const setLoading = () => dispatch({ type: "SET_LOADING" });
 
@@ -73,6 +92,7 @@ export const GithubProvider = ({ children }) => {
         searchUsers,
         clearUsers,
         getUser,
+        getUserRepos,
       }}
     >
       {children}
