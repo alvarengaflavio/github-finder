@@ -42,13 +42,17 @@ export const User = () => {
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 md:mb-8 md:gap-8">
           <div className="custom-card-image mb-6 md:mb-0">
-            <div className="rounded-lg shadow-xl card image-full">
+            <div className="relative rounded-lg shadow-xl card image-full">
               <figure>
                 <img src={avatar_url} alt={"picure of " + name} />
               </figure>
-              <div className="card-body justify-end items-start text-left">
-                <h2 className="card-title mb-0">{name}</h2>
-                <p className="font-normal text-sm">{"/" + login}</p>
+              <div className="card-body ">
+                <h2 className="card-title mb-0 absolute left-1/12 bottom-1/5">
+                  {name}
+                </h2>
+                <p className="font-normal text-sm absolute left-1/12  bottom-1/6">
+                  {"/" + login}
+                </p>
               </div>
             </div>
           </div>
@@ -67,47 +71,49 @@ export const User = () => {
                 href={html_url}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-outline"
+                className="btn btn-outline mt-1"
               >
                 Visit Github Profile
               </a>
+
+              <div className="w-full rounded-lg shadow-md bg-base-100 stats flex flex-wrap overflow-hidden ">
+                {location && (
+                  <div className="stat">
+                    <div className="stat-title text-lg">Location</div>
+                    <div className="text-base stat-value -mt-1">{location}</div>
+                  </div>
+                )}
+
+                {blog && (
+                  <div className="stat -mt-8">
+                    <div className="stat-title text-lg">Website</div>
+                    <div className="text-base stat-value -mt-1">
+                      <a href={blog} target="_blank" rel="noreferrer">
+                        {blog}
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {twitter_username && (
+                  <div className="stat -mt-8">
+                    <div className="stat-title text-lg">Twitter</div>
+                    <div className="text-base stat-value -mt-1">
+                      <a
+                        href={`https://twitter.com/${twitter_username}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {twitter_username}
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <div className="w-full rounded-lg shadow-md bg-base-100 stats flex flex-wrap overflow-hidden">
-            {location && (
-              <div className="stat -mt-4">
-                <div className="stat-title text-lg">Location</div>
-                <div className="text-lg stat-value sm:text-sm">{location}</div>
-              </div>
-            )}
-
-            {blog && (
-              <div className="stat -mt-4">
-                <div className="stat-title text-lg">Website</div>
-                <div className="text-lg stat-value sm:text-sm">
-                  <a href={blog} target="_blank" rel="noreferrer">
-                    {blog}
-                  </a>
-                </div>
-              </div>
-            )}
-
-            {twitter_username && (
-              <div className="stat -mt-4">
-                <div className="stat-title text-lg sm:text-sm">Twitter</div>
-                <div className="text-lg stat-value sm:text-sm">
-                  <a
-                    href={`https://twitter.com/${twitter_username}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {twitter_username}
-                  </a>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
+
         <div className="w-full py-5 mb-6 rounded-lg shadow-md bg-base-100 stats overflow-hidden flex flex-wrap md:flex-nowrap">
           <div className="stat sm:basis-1/2">
             <div className="stat-figure text-secondary">
