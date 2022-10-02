@@ -12,8 +12,6 @@ export const RepoItem = ({ repo }) => {
     stargazers_count,
   } = repo;
 
-  console.log(repo);
-
   return (
     <div className="card mb-2 rounded-md bg-gray-800 hover:bg-gray-900">
       <div className="card-body">
