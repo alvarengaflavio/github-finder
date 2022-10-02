@@ -89,7 +89,8 @@ export const User = () => {
                 )}
 
                 {blog && (
-                  <div className="stat -mt-8">
+                  // z-10 evita que a div do twitter fique acima do link
+                  <div className="stat -mt-8 z-10">
                     <div className="stat-title text-lg">Website</div>
                     <div className="text-base stat-value -mt-1">
                       <a href={blog} target="_blank" rel="noreferrer">
