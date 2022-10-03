@@ -5,7 +5,7 @@ import AlertContext from "../../contexts/alert/AlertContext";
 
 export const UserSearch = () => {
   const [text, setText] = useState(() => "");
-  const { users, clearUsers, dispatch } = useContext(GithubContext);
+  const { users, dispatch } = useContext(GithubContext);
   const { setAlert } = useContext(AlertContext);
 
   const handleChange = (e) => setText(e.target.value);
@@ -33,7 +33,7 @@ export const UserSearch = () => {
   };
 
   const handleClear = () => {
-    if (users.length > 0) clearUsers();
+    if (users.length > 0) dispatch({ type: "CLEAR_USERS" });
   };
 
   return (
