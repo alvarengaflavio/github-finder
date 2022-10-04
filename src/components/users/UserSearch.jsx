@@ -44,14 +44,14 @@ export const UserSearch = () => {
             <div className="relative">
               <input
                 type="text"
-                className="w-full pr-40 bg-gray-200 input input-lg text black"
+                className="w-full pr-40 bg-gray-200 input input-lg text-black"
                 placeholder="Search"
                 value={text}
                 onChange={handleChange}
               />
               <button
                 type="submit"
-                className="absolute top-0 right-0 rouded-l-none w-36 btn btn-lg"
+                className="absolute top-0 -right-1 rounded-l-none w-36 btn btn-lg shadow-md"
               >
                 go
               </button>
