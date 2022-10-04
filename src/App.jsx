@@ -14,24 +14,25 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col justify-between h-screen">
-        <Navbar />
+        <div className="navbar__content__wrapper">
+          <Navbar />
 
-        <main className="container mx-auto px-3 pb-12">
-          {/* Navbar n footer doesn't need ctx hooks */}
-          <GithubProvider>
-            <AlertProvider>
-              <Alert />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/user/:login" element={<User />} />
-                <Route path="/notfound" element={<NotFound />} />
-                <Route path="/*" element={<NotFound />} />
-              </Routes>
-            </AlertProvider>
-          </GithubProvider>
-        </main>
-
+          <main className="container mx-auto px-3 pb-12">
+            {/* Navbar n footer doesn't need ctx hooks */}
+            <GithubProvider>
+              <AlertProvider>
+                <Alert />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/user/:login" element={<User />} />
+                  <Route path="/notfound" element={<NotFound />} />
+                  <Route path="/*" element={<NotFound />} />
+                </Routes>
+              </AlertProvider>
+            </GithubProvider>
+          </main>
+        </div>
         <Footer />
       </div>
     </Router>
