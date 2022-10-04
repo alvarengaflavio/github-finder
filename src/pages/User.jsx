@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import GithubContext from "../contexts/github/GithubContext";
 import { LoadingSpinner } from "../components/layout/LoadingSpinner";
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
-import { getUser, getUserRepos } from "../contexts/github/GithubActions";
+import { getUserAndRepos } from "../contexts/github/GithubActions";
 import { Repos } from "../components/repos/Repos";
 
 export const User = () => {
@@ -15,11 +15,8 @@ export const User = () => {
     dispatch({ type: "SET_LOADING" });
 
     const getUserData = async () => {
-      const userData = await getUser(params.login);
-      dispatch({ type: "GET_USER", payload: userData });
-
-      const userRepoData = await getUserRepos(params.login);
-      dispatch({ type: "GET_REPOS", payload: userRepoData });
+      const userData = await getUserAndRepos(params.login);
+      dispatch({ type: "GET_USER_AND_REPOS", payload: userData });
     };
 
     getUserData();
